@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
+// global.Promise is reference to ES6 Promise inside the nodejs environment
+mongoose.Promise = global.Promise;
 //mongodb can consist of multiple databases.
-mongoose.connect('mongodb://localhost/user_test');
-mongoose.connection
-  .once('open', () => console.log('Good to go!'))
-  .on('error', (error) => {
-    console.warn('Warning', error);
-  });
+before((done) => {
+  mongoose.connect('mongodb://localhost/user_test');
+  mongoose.connection
+    .once('open', () => { done();})
+    .on('error', (error) => {
+      console.warn('Warning', error);
+    });
+});
+
 
   beforeEach((done) => {
     mongoose.connection.collections.users.drop(() => {
