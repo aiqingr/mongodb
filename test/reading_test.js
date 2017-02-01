@@ -13,7 +13,10 @@ describe('Reading users out of the database', () => {
   it('Finds all users with a name of yoyo', (done) => {
     User.find({ name: 'Yoyo' })
       .then((users) => {
-        console.log(users);
+        console.log(users[0]._id);
+        console.log(yoyo._id);
+        //plus toString because the _id is an object in the mongodb database
+        assert(users[0]._id.toString() === yoyo._id.toString());
         done();
       });
   });
