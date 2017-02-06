@@ -58,7 +58,7 @@ describe('Updating records', () => {
       .then((user) => {
         assert(user.postCount === 1);
         done();
-      })
+      });
   });
 
 });
