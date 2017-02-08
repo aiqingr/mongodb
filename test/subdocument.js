@@ -13,6 +13,26 @@ describe('Subdocument', () => {
       .then((user) => {
         assert(user.posts[0].title === 'PostTitle');
         done();
-      })
+      });
   });
+
+  it('Can add subdocuments to an existing record', (done) => {
+    const yoyo = new User({
+      name: 'Yoyo',
+      posts: []
+    });
+
+    yoyo.save()
+      .then(() => User.findOne({ name: 'Yoyo' }))
+      .then((user) => {
+        user.posts.push({ title: 'New Post' });
+        return user.save();
+      })
+      .then(() => User.findOne({ name: 'Yoyo'}))
+      .then((user) => {
+        assert(user.posts[0].title === 'New Post');
+        done();
+      });
+  });
+
 });
