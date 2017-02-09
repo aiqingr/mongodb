@@ -52,11 +52,11 @@ describe('Updating records', () => {
     );
   });
 
-  it('A user can have their postcount incremented by 1', (done) => {
-    User.update({ name: 'Yoyo' }, { $inc: { postCount: 1 } })
+  xit('A user can have their postcount incremented by 1', (done) => {
+    User.update({ name: 'Yoyo' }, { $inc: { postCount: 10 } })
       .then(() => User.findOne({ name: 'Yoyo' }))
       .then((user) => {
-        assert(user.postCount === 1);
+        assert(user.postCount === 10);
         done();
       });
   });
